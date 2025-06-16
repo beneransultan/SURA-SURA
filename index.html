@@ -114,12 +114,17 @@
 
         <div id="quiz-screen" class="w-full max-w-4xl hidden">
             <div class="bg-slate-800 p-6 rounded-lg shadow-2xl">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h2 id="subtest-title" class="text-2xl font-bold text-sky-400"></h2>
-                        <p id="question-counter" class="text-slate-300 font-semibold"></p>
+                <div class="relative flex justify-center items-center mb-4">
+                    <button onclick="showExitConfirm()" class="absolute left-0 bg-slate-700 hover:bg-slate-600 p-2 rounded-full transition" aria-label="Kembali ke Menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <div class="text-center">
+                        <h2 id="subtest-title" class="text-xl md:text-2xl font-bold text-sky-400"></h2>
+                        <p id="question-counter" class="text-sm text-slate-300 font-semibold"></p>
                     </div>
-                    <div id="timer-display" class="text-2xl font-bold bg-slate-900 px-4 py-2 rounded-lg"></div>
+                    <div id="timer-display" class="absolute right-0 text-xl md:text-2xl font-bold bg-slate-900 px-4 py-2 rounded-lg"></div>
                 </div>
                 
                 <div class="w-full bg-slate-700 rounded-full h-2.5 mb-2">
@@ -160,7 +165,17 @@
                 <button onclick="backToMenu()" class="mt-8 bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-lg transition">Kembali ke Menu Utama</button>
             </div>
         </div>
-
+    </div>
+    
+    <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-slate-800 rounded-lg p-8 max-w-sm w-full text-center slide-up">
+            <h3 class="text-xl font-bold mb-4">Konfirmasi Keluar</h3>
+            <p class="text-slate-300 mb-6">Apakah Anda yakin ingin keluar? Proses latihan akan dihentikan dan tidak disimpan.</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="hideExitConfirm()" class="bg-slate-600 hover:bg-slate-500 text-white font-semibold py-2 px-6 rounded-lg transition">Batal</button>
+                <button onclick="backToMenu()" class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-6 rounded-lg transition">Ya, Keluar</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -210,9 +225,9 @@
                 { level: "HOTS", question: "METAFORA : KIASAN ::", options: ["Antonim : Lawan Kata", "Analogi : Perbedaan", "Opini : Fakta", "Tesis : Antitesis", "Paradoks : Sejalan"], answer: 0, explanation: "Hubungannya adalah 'contoh spesifik : kategori umum'. METAFORA adalah salah satu jenis dari KIASAN. Hubungan yang paling paralel adalah ANTONIM adalah salah satu jenis dari LAWAN KATA." },
                 { level: "HOTS", question: "ANTONIM dari APRIORI adalah...", options: ["Unggulan", "Kesimpulan", "Hipotesis", "Aposteriori", "Teori"], answer: 3, explanation: "Apriori adalah pengetahuan yang didasarkan pada penalaran logis, bukan pengalaman. Antonimnya adalah Aposteriori, yaitu pengetahuan yang didasarkan pada pengalaman atau observasi empiris." },
                 { level: "HOTS", question: "BUNGA : RIBA ::", options: ["Hemat : Kikir", "Hasrat : Ekstasi", "Senang : Bahagia", "Minat : Bakat", "Rajin : Pandai"], answer: 0, explanation: "Hubungannya adalah 'konsep wajar : konsep yang berlebihan/negatif'. Bunga bank itu wajar, RIBA adalah bunga yang berlebihan dan mencekik. HEMAT itu baik, KIKIR adalah hemat yang berlebihan." },
-                { level: "HOTS", question: "JALANG : PASUNG ::", options: ["Kembang : Kuncup", "Kabur : Kejar", "Hantar : Pesan", "Pesat : Lambat", "Ringkas : Pangkas"], answer: 1, explanation: "Hubungannya adalah (Sifat/Kondisi Liar) : (Tindakan untuk Mengendalikannya). JALANG (liar) perlu di-PASUNG (dikendalikan). KABUR (liar/tidak terkendali) perlu di-KEJAR (dikendalikan). Ini adalah hubungan masalah-solusi." },
-                { level: "HOTS", question: "INSOMNIA : MENGANTUK ::", options: ["Absen : Hadir", "Nyeri : Obat", "Lapar : Makan", "Euforia : Sedih", "Haus : Air"], answer: 0, explanation: "Hubungannya adalah kondisi : antonim/lawan kondisi. INSOMNIA (tidak bisa tidur) adalah lawan dari MENGANTUK. ABSEN (tidak hadir) adalah lawan dari HADIR." },
-                { level: "Sedang", question: "PESAWAT : AVTUR ::", options: ["Radio : Listrik", "Manusia : Makanan", "Motor : Bensin", "Handphone : Pulsa", "Penyakit : Virus"], answer: 2, explanation: "Hubungannya adalah ENTITAS : SUMBER ENERGI. PESAWAT membutuhkan AVTUR untuk terbang, sama seperti MOTOR membutuhkan BENSIN untuk berjalan. Pilihan B benar secara konsep, namun pilihan C lebih paralel (mesin:bahan bakar)." },
+                { level: "HOTS", question: "JALANG : PASUNG ::", options: ["Kembang : kuncup", "Kabur : kejar", "Hantar : pesan", "Pesat : lambat", "Ringkas : pangkas"], answer: 1, explanation: "Hubungannya adalah (Sifat/Kondisi Liar) : (Tindakan untuk Mengendalikannya). JALANG (liar) perlu di-PASUNG (dikendalikan). KABUR (liar/tidak terkendali) perlu di-KEJAR (dikendalikan). Ini adalah hubungan masalah-solusi." },
+                { level: "HOTS", question: "INSOMNIA : MENGANTUK ::", options: ["Absen : hadir", "Nyeri : obat", "Lapar : makan", "Euforia : sedih", "Haus : air"], answer: 0, explanation: "Hubungannya adalah kondisi : antonim/lawan kondisi. INSOMNIA (tidak bisa tidur) adalah lawan dari MENGANTUK. ABSEN (tidak hadir) adalah lawan dari HADIR." },
+                { level: "Sedang", question: "PESAWAT : AVTUR ::", options: ["Radio : listrik", "Manusia : makanan", "Motor : bensin", "Handphone : pulsa", "Penyakit : virus"], answer: 2, explanation: "Hubungannya adalah ENTITAS : SUMBER ENERGI. PESAWAT membutuhkan AVTUR untuk terbang, sama seperti MOTOR membutuhkan BENSIN untuk berjalan. Pilihan B benar secara konsep, namun pilihan C lebih paralel (mesin:bahan bakar)." },
                 ...Array.from({ length: 44 }, (_, i) => ({ level: "Sedang", question: `SINONIM dari KENDALA adalah...`, options: ["Dukungan", "Hambatan", "Kemudahan", "Solusi", "Peluang"], answer: 1, explanation: `Kendala berarti halangan, rintangan, atau hambatan.` }))
             ],
             kemampuanKuantitatif: [
@@ -227,7 +242,7 @@
             kemampuanLogika: [
                 { level: "HOTS", context: "Premis 1: Jika tidak ada larangan berkerumun, orang-orang akan pergi ke tempat nongkrong.<br>Premis 2: Jika orang-orang pergi ke tempat nongkrong, terjadi lonjakan kasus.<br>Fakta: Tidak terjadi lonjakan kasus.", question: "Kesimpulan yang paling logis adalah...", options: ["Orang-orang tidak pergi ke tempat nongkrong", "Ada larangan berkerumun", "Orang-orang tetap berkerumun", "Larangan berkerumun tidak efektif", "Lonjakan kasus disebabkan hal lain"], answer: 1, explanation: "Ini menggunakan gabungan silogisme hipotetik dan modus tollens. Dari Premis 1 ($P \\Rightarrow Q$) dan Premis 2 ($Q \\Rightarrow R$), kita bisa simpulkan $P \\Rightarrow R$ (Jika tidak ada larangan, maka terjadi lonjakan kasus). Fakta yang ada adalah $\\sim R$ (Tidak terjadi lonjakan kasus). Menggunakan modus tollens (Jika $P \\Rightarrow R$ dan $\\sim R$, maka $\\sim P$), kesimpulannya adalah $\\sim P$ (Tidak benar jika tidak ada larangan berkerumun), yang artinya 'Ada larangan berkerumun'." },
                 { level: "HOTS", context: "Lima orang (A, B, C, D, E) duduk di meja bundar. A tidak duduk di sebelah B. C duduk tepat di antara E dan B. D duduk di sebelah E.", question: "Siapakah yang duduk di sebelah A?", options: ["D dan C", "E dan B", "B dan C", "D dan B", "E dan C"], answer: 3, explanation: "Visualisasikan 5 kursi. 1) C di antara E dan B. Urutan: E-C-B. 2) D di sebelah E. Urutan menjadi: D-E-C-B. 3) Lima orang duduk melingkar. Maka A harus mengisi sisa kursi di antara D dan B. Urutan melingkar: D-E-C-B-A. 4) Cek aturan 'A tidak di sebelah B'. Ini terpenuhi. Maka, yang duduk di sebelah A adalah D dan B." },
-                { level: "HOTS", context: "Siswa yang pandai dalam matematika lebih mudah belajar bahasa. Orang yang tinggal di negara asing lebih lancar dalam bahasa yang dipakai di negara tersebut. Ratna belajar bahasa Inggris.", question: "Kesimpulan yang valid adalah...", options: ["Ratna pasti pandai matematika.", "Ratna pasti tinggal di luar negeri.", "Tidak mungkin Ratna pandai matematika.", "Mungkin Ratna tidak pernah tinggal di luar negeri.", "Tidak ada kesimpulan yang bisa ditarik."], answer: 3, explanation: "Premis yang ada adalah implikasi (jika-maka), bukan bi-implikasi (jika dan hanya jika). Karena Ratna belajar bahasa Inggris (akibat), kita tidak bisa menyimpulkan penyebabnya secara pasti. Namun, kita bisa membuat kesimpulan tentang kemungkinan. Skenario 'Ratna belajar bahasa Inggris tanpa tinggal di luar negeri (misal lewat kursus)' adalah sebuah kemungkinan yang valid dan tidak terbantahkan oleh premis. Jadi, 'Mungkin Ratna tidak pernah tinggal di luar negeri' adalah kesimpulan yang sah." },
+                { level: "HOTS", context: "Siswa yang pandai dalam matematika lebih mudah belajar bahasa. Orang yang tinggal di negara asing lebih lancar dalam bahasa yang dipakai di negara tersebut. Ratna belajar bahasa Inggris.", question: "Kesimpulan yang valid adalah...", options: ["Ratna pasti pandai matematika.", "Ratna pasti tinggal di luar negeri.", "Tidak mungkin Ratna pandai matematika.", "Mungkin Ratna tidak pernah tinggal di luar negeri.", "Tidak ada kesimpulan yang bisa ditarik."], answer: 3, explanation: "Premis yang ada adalah implikasi (jika-maka), bukan bi-implikasi (jika dan hanya jika). Karena Ratna belajar bahasa Inggris (akibat), kita tidak bisa menyimpulkan penyebabnya secara pasti. Namun, kita bisa membuat kesimpulan tentang kemungkinan. Skenario 'Ratna belajar bahasa Inggris tanpa tinggal di luar negeri (misal lewat kursus)' adalah sebuah kemungkinan yang valid dan tidak terbantahkan oleh premis yang ada. Jadi, 'Mungkin Ratna tidak pernah tinggal di luar negeri' adalah kesimpulan yang sah." },
                 { level: "HOTS", context: "Semua pahlawan berhati mulia. Beberapa pejuang adalah pahlawan.", question: "Kesimpulan yang paling tepat adalah...", options: ["Semua pejuang berhati mulia.", "Beberapa pejuang tidak berhati mulia.", "Semua yang berhati mulia adalah pejuang.", "Beberapa pejuang berhati mulia.", "Tidak ada pejuang yang berhati mulia."], answer: 3, explanation: "Ini adalah silogisme dengan kuantor 'semua' dan 'beberapa'. Jika Semua A adalah B, dan Beberapa C adalah A, maka kesimpulannya adalah Beberapa C adalah B. Dalam kasus ini: A=Pahlawan, B=Berhati Mulia, C=Pejuang. Maka, kesimpulannya adalah 'Beberapa pejuang berhati mulia'." },
                 { level: "HOTS", context: "Hanya jika cuaca cerah, festival akan diadakan. Festival tidak diadakan.", question: "Maka...", options: ["Cuaca pasti tidak cerah", "Cuaca pasti cerah", "Cuaca mungkin tidak cerah", "Festival tetap diadakan meski hujan", "Tidak ada hubungan antara cuaca dan festival"], answer: 0, explanation: "'Hanya jika P, maka Q' secara logis ekuivalen dengan 'Jika Q, maka P'. Jadi, 'Jika festival diadakan (Q), maka cuaca cerah (P)'. Diberikan fakta $\\sim Q$ (festival tidak diadakan). Menggunakan Modus Tollens, $\\sim Q$ mengakibatkan $\\sim P$. Jadi kesimpulan yang pasti adalah 'Cuaca tidak cerah'."},
                 { level: "Sedang", context: "Semua mamalia menyusui anaknya. Paus adalah mamalia.", question: "Kesimpulan yang paling tepat adalah...", options: ["Paus tidak menyusui anaknya", "Paus menyusui anaknya", "Semua hewan laut menyusui", "Paus adalah ikan", "Tidak dapat ditarik kesimpulan"], answer: 1, explanation: "Ini adalah contoh silogisme kategorial. Jika semua anggota kelompok (mamalia) memiliki sifat (menyusui), dan individu (paus) adalah anggota kelompok tersebut, maka individu itu juga pasti memiliki sifat tersebut. Jadi, Paus menyusui anaknya." },
@@ -275,6 +290,7 @@
         const reviewContainerEl = document.getElementById('review-container');
         const questionCard = document.getElementById('question-card');
         const questionNavContainer = document.getElementById('question-nav-container');
+        const confirmModal = document.getElementById('confirm-modal');
 
         const subtestTitles = {
             matematikaDasar: 'Matematika Dasar',
@@ -303,8 +319,10 @@
 
             const isExercise = currentSubtest === 'exercise';
             timerDisplayEl.style.display = isExercise ? 'block' : 'none';
-            prevButton.style.display = isExercise ? 'block' : 'none';
             questionNavContainer.style.display = isExercise ? 'flex' : 'none';
+            
+            prevButton.classList.remove('hidden');
+            nextButton.classList.remove('hidden');
 
             if(isExercise) {
                 startTimer(45 * 60);
@@ -341,16 +359,35 @@
 
             optionsContainerEl.innerHTML = '';
             const previouslySelected = userAnswers[currentQuestionIndex];
+            const isAnswered = previouslySelected !== null;
+
             q.options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.innerHTML = option;
                 button.classList.add('option-btn', 'w-full', 'text-left', 'p-4', 'bg-slate-700', 'hover:bg-slate-600', 'rounded-lg', 'transition-all', 'duration-200', 'border-2', 'border-transparent');
-                button.onclick = () => selectAnswer(index);
-                if (currentSubtest === 'exercise' && index === previouslySelected) {
-                    button.classList.add('selected-answer');
+                
+                if (currentSubtest === 'exercise') {
+                    if (index === previouslySelected) {
+                        button.classList.add('selected-answer');
+                    }
+                } else {
+                    if (isAnswered) {
+                        button.disabled = true;
+                        if (index === q.answer) {
+                            button.classList.add('correct');
+                        } else if (index === previouslySelected) {
+                            button.classList.add('incorrect');
+                        }
+                    }
                 }
+
+                button.onclick = () => selectAnswer(index);
                 optionsContainerEl.appendChild(button);
             });
+            
+            if(currentSubtest !== 'exercise' && isAnswered) {
+                showImmediateFeedback();
+            }
              
             if (typeof MathJax !== 'undefined') {
                 MathJax.typesetPromise([quizScreen]).catch(function (err) {
@@ -361,34 +398,40 @@
             updateNavButtons();
         }
 
+        function showImmediateFeedback() {
+             const q = activeQuestions[currentQuestionIndex];
+             const isCorrect = userAnswers[currentQuestionIndex] === q.answer;
+             if (isCorrect) {
+                feedbackTitleEl.textContent = 'Benar!';
+                feedbackTitleEl.className = 'text-xl font-bold mb-2 text-green-400';
+            } else {
+                feedbackTitleEl.textContent = 'Salah!';
+                feedbackTitleEl.className = 'text-xl font-bold mb-2 text-red-400';
+            }
+            explanationTextEl.innerHTML = q.explanation;
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([explanationTextEl]).catch(err => console.log(err));
+            }
+            feedbackSectionEl.classList.remove('hidden');
+            nextButton.classList.remove('hidden');
+        }
+
         function selectAnswer(selectedIndex) {
             userAnswers[currentQuestionIndex] = selectedIndex;
-            const q = activeQuestions[currentQuestionIndex];
-            const isCorrect = selectedIndex === q.answer;
-            
             const optionButtons = optionsContainerEl.getElementsByClassName('option-btn');
             
             if (currentSubtest !== 'exercise') {
-                if (isCorrect) {
-                    feedbackTitleEl.textContent = 'Benar!';
-                    feedbackTitleEl.className = 'text-xl font-bold mb-2 text-green-400';
-                } else {
-                    feedbackTitleEl.textContent = 'Salah!';
-                    feedbackTitleEl.className = 'text-xl font-bold mb-2 text-red-400';
-                    optionButtons[q.answer].classList.add('correct');
-                }
-                optionButtons[selectedIndex].classList.add(isCorrect ? 'correct' : 'incorrect');
-                
-                explanationTextEl.innerHTML = q.explanation;
-                 if (typeof MathJax !== 'undefined') {
-                    MathJax.typesetPromise([explanationTextEl]).catch(err => console.log(err));
-                }
-                feedbackSectionEl.classList.remove('hidden');
-
+                showImmediateFeedback();
                 for (let btn of optionButtons) {
                     btn.disabled = true;
                 }
-                nextButton.classList.remove('hidden');
+                const q = activeQuestions[currentQuestionIndex];
+                if (selectedIndex === q.answer) {
+                    optionButtons[selectedIndex].classList.add('correct');
+                } else {
+                    optionButtons[selectedIndex].classList.add('incorrect');
+                    optionButtons[q.answer].classList.add('correct');
+                }
             } else {
                 for (let btn of optionButtons) {
                     btn.classList.remove('selected-answer');
@@ -399,25 +442,24 @@
         }
 
         function updateNavButtons() {
-            if (currentSubtest !== 'exercise') {
-                 if (currentQuestionIndex >= activeQuestions.length -1) {
-                    nextButton.textContent = 'Selesaikan';
-                    nextButton.onclick = endQuiz;
-                } else {
-                    nextButton.textContent = 'Soal Berikutnya';
-                    nextButton.onclick = nextQuestion;
-                }
+            prevButton.style.visibility = currentQuestionIndex === 0 ? 'hidden' : 'visible';
+            
+            if (currentQuestionIndex === activeQuestions.length - 1) {
+                nextButton.textContent = 'Selesaikan';
+                nextButton.onclick = endQuiz;
             } else {
-                prevButton.style.visibility = currentQuestionIndex === 0 ? 'hidden' : 'visible';
-                nextButton.classList.remove('hidden');
-                if (currentQuestionIndex === activeQuestions.length - 1) {
-                    nextButton.textContent = 'Selesaikan';
-                    nextButton.onclick = endQuiz;
-                } else {
-                    nextButton.textContent = 'Soal Berikutnya';
-                    nextButton.onclick = nextQuestion;
-                }
+                nextButton.textContent = 'Soal Berikutnya';
+                nextButton.onclick = nextQuestion;
+            }
+            
+            if (currentSubtest === 'exercise') {
                 updateQuestionNavStatus(currentQuestionIndex, false);
+            } else {
+                if (userAnswers[currentQuestionIndex] === null) {
+                    nextButton.classList.add('hidden');
+                } else {
+                    nextButton.classList.remove('hidden');
+                }
             }
         }
 
@@ -430,21 +472,11 @@
         }
         
         function nextQuestion() {
-            if (currentSubtest !== 'exercise'){
-                 if (currentQuestionIndex < activeQuestions.length - 1) {
-                    currentQuestionIndex++;
-                    displayQuestion();
-                    nextButton.classList.add('hidden');
-                 } else {
-                    endQuiz();
-                 }
+            if (currentQuestionIndex < activeQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
             } else {
-                if (currentQuestionIndex < activeQuestions.length - 1) {
-                    currentQuestionIndex++;
-                    displayQuestion();
-                } else {
-                    endQuiz();
-                }
+                endQuiz();
             }
         }
 
@@ -469,7 +501,7 @@
             const percentage = activeQuestions.length > 0 ? Math.round((score / activeQuestions.length) * 100) : 0;
             scoreDisplayEl.innerHTML = `${score} / ${activeQuestions.length} <span class="block text-3xl mt-2 text-sky-400">(${percentage}%)</span>`;
             
-            if (currentSubtest === 'exercise') {
+            if (currentSubtest === 'exercise' || currentSubtest !== 'exercise') { // Always show review
                 reviewSectionEl.classList.remove('hidden');
                 displayReview();
             } else {
@@ -513,12 +545,22 @@
 
         function backToMenu() {
             clearInterval(timerInterval);
+            hideExitConfirm();
             resultsScreen.classList.add('hidden');
             quizScreen.classList.add('hidden');
             menuScreen.classList.remove('hidden');
             menuScreen.classList.add('fade-in');
         }
         
+        // --- Modal Logic ---
+        function showExitConfirm() {
+            confirmModal.classList.remove('hidden');
+        }
+
+        function hideExitConfirm() {
+            confirmModal.classList.add('hidden');
+        }
+
         // --- Navigation Logic for Exercise Mode ---
         function generateQuestionNav() {
             questionNavContainer.innerHTML = '';
@@ -592,4 +634,4 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
-</ht
+</html>
