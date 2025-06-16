@@ -1,2 +1,0 @@
-# SURA-SURA
-Photobooth
