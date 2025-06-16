@@ -114,17 +114,17 @@
 
         <div id="quiz-screen" class="w-full max-w-4xl hidden">
             <div class="bg-slate-800 p-6 rounded-lg shadow-2xl">
-                <div class="relative flex justify-center items-center mb-4">
-                    <button onclick="showExitConfirm()" class="absolute left-0 bg-slate-700 hover:bg-slate-600 p-2 rounded-full transition" aria-label="Kembali ke Menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                <div class="flex justify-between items-center mb-4">
+                    <button onclick="showExitConfirm()" class="bg-slate-700 hover:bg-slate-600 p-2 rounded-full transition" aria-label="Kembali ke Menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                     </button>
-                    <div class="text-center">
-                        <h2 id="subtest-title" class="text-xl md:text-2xl font-bold text-sky-400"></h2>
-                        <p id="question-counter" class="text-sm text-slate-300 font-semibold"></p>
+                    <div class="text-center mx-2 flex-shrink min-w-0">
+                        <h2 id="subtest-title" class="text-lg sm:text-xl md:text-2xl font-bold text-sky-400 truncate"></h2>
+                        <p id="question-counter" class="text-xs sm:text-sm text-slate-300 font-semibold"></p>
                     </div>
-                    <div id="timer-display" class="absolute right-0 text-xl md:text-2xl font-bold bg-slate-900 px-4 py-2 rounded-lg"></div>
+                    <div id="timer-display" class="text-lg sm:text-xl md:text-2xl font-bold bg-slate-900 px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-right" style="min-width: 85px;"></div>
                 </div>
                 
                 <div class="w-full bg-slate-700 rounded-full h-2.5 mb-2">
@@ -634,4 +634,4 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
-</html>
+</ht
